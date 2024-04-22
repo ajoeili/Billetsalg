@@ -1,3 +1,5 @@
+package Domain_Model;
+
 public class Event {
     private String navn;
     private String dato;

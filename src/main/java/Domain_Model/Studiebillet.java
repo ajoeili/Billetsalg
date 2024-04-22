@@ -1,6 +1,10 @@
+package Domain_Model;
+
+import Domain_Model.Billet;
+
 public class Studiebillet extends Billet {
 
-    public Studiebillet(String id, String eventNavn, String eventDato) {
+    public Studiebillet(int id, String eventNavn, String eventDato) {
         super("Studierabat", 90, id, eventNavn, eventDato);
     }
 
@@ -10,6 +14,6 @@ public class Studiebillet extends Billet {
 
     @Override
     public int beregnPris() {
-        if ()
+        return 0;
     }
 }
