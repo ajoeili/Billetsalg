@@ -1,6 +1,10 @@
 package Domain_Model;
 
 import Domain_Model.Billet;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Studiebillet extends Billet {
 
@@ -13,7 +17,13 @@ public class Studiebillet extends Billet {
     }
 
     @Override
-    public int beregnPris() {
-        return 0;
+    public int beregnPris(Billet billet) {
+        if (billet instanceof Studiebillet)
+            if(erEventMindreEndTiDage(billet.event.getDato())) {
+                billet.pris = billet.RABATPROCENT;
+                return pris;
+            }
+        return pris;
     }
+
 }

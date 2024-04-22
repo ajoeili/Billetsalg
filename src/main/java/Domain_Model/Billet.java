@@ -1,13 +1,20 @@
 package Domain_Model;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Billet implements BilletInterface {
 
     // Billetinformation
 
-    private String type;
-    private int pris;
-    private int id;
-    public static final double RABATPROCENT = 0.15;
+    protected String type;
+    protected int pris;
+    protected int id;
+    protected int RABATPROCENT = ((pris * 15) / 100);
+
+    LocalDate currentDate;
     Event event;
 
     public Billet(String type, int pris, int id, String eventNavn, String eventDato) {
@@ -17,8 +24,14 @@ public class Billet implements BilletInterface {
         event = new Event(eventNavn, eventDato);
     }
 
+    @Override
     public void printBillet() {
         System.out.println(toString());
+    }
+
+    @Override
+    public int beregnPris(Billet billet) {
+        return 0;
     }
 
     @Override
@@ -33,11 +46,23 @@ public class Billet implements BilletInterface {
                 "_____________________\n";
     }
 
-    public int beregnPris() {
-        return 0;
-    }
-
     public int getId() {
         return id;
     }
+
+    public boolean erEventMindreEndTiDage(String eventDatoString) {
+
+        LocalDate eventDato = LocalDate.parse(eventDatoString, DateTimeFormatter.ISO_LOCAL_DATE);
+
+        ZonedDateTime tidszone = ZonedDateTime.now(ZoneId.of("+1"));
+        LocalDate dagensDato = tidszone.toLocalDate();
+
+        int hvorMangeDageTilEvent = dagensDato.until(eventDato).getDays();
+
+        if (hvorMangeDageTilEvent > 10) {
+            return true;
+        }
+        return false;
+    }
+
 }
