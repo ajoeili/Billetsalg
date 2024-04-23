@@ -12,44 +12,47 @@ public class SolgteBilletter {
         solgteBilletter.add(billet);
     }
 
-        public void printSolgteBilletter () {
-            for (Billet billet : solgteBilletter) {
-                System.out.println(billet.toString());
+    public void printSolgteBilletter() {
+        for (Billet billet : solgteBilletter) {
+            System.out.println(billet.toString());
+        }
+    }
+
+    public String visSolgteBilletter() {
+        int antalDørbilletter = 0;
+        int antalForsalgsbilletter = 0;
+        int antalStudiebilletter = 0;
+
+        for (Billet billet : solgteBilletter) {
+            if (billet instanceof Dørbillet) {
+                antalDørbilletter++;
+            }
+            if (billet instanceof Forsalgsbillet) {
+                antalForsalgsbilletter++;
+            }
+            if (billet instanceof Studiebillet) {
+                antalStudiebilletter++;
+            }
+            if (solgteBilletter.isEmpty()) {
+                return "Ingen solgte billetter.";
             }
         }
+        return "ANTAL SOLGTE BILLETTER\n" +
+                "Dørbilletter: " + antalDørbilletter + "\n" +
+                "Forsalgsbilletter: " + antalForsalgsbilletter + "\n" +
+                "Studiebilletter: " + antalStudiebilletter + "\n";
 
-        public String visSolgteBilletter () {
-            int antalDørbilletter = 0;
-            int antalForsalgsbilletter = 0;
-            int antalStudiebilletter = 0;
-
-            for (Billet billet : solgteBilletter) {
-                if (billet instanceof Dørbillet) {
-                    antalDørbilletter++;
-                }
-                if (billet instanceof Forsalgsbillet) {
-                    antalForsalgsbilletter++;
-                }
-                if (billet instanceof Studiebillet) {
-                    antalStudiebilletter++;
-                }
-                return "ANTAL SOLGTE BILLETTER\n" +
-                        "Dørbilletter: " + antalDørbilletter + "\n" +
-                        "Forsalgsbilletter: " + antalForsalgsbilletter + "\n" +
-                        "Studiebilletter: " + antalStudiebilletter + "\n";
-            }
-            return "Ingen solgte billetter.";
-        }
-
-        public String hentAlleStudiekortId () {
-
+    }
+        public ArrayList<String> hentAlleStudiekortId() {
+            ArrayList<String> studieIds = new ArrayList<>();
             for (Billet billet : solgteBilletter) {
                 if (billet instanceof Studiebillet) {
-                    sorterBilletter();
                     String id = String.valueOf(billet.getId());
-                    return id;
+                    studieIds.add(id);
                 }
-            } return null;
+            }
+            sorterBilletter();
+            return studieIds;
         }
 
         public void sorterBilletter () {
