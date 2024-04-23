@@ -21,7 +21,9 @@ public class Main {
         solgteBilletter.tilføjSolgteBilletter(dørbillet);
         solgteBilletter.tilføjSolgteBilletter(forsalgsbillet);
 
-        solgteBilletter.hentAlleStudiekortId();
+        System.out.println(solgteBilletter.hentAlleStudiekortId());
+        System.out.println(solgteBilletter.visSolgteBilletter());
+
         solgteBilletter.printSolgteBilletter();
 
     }

@@ -12,7 +12,7 @@ public class Billet implements BilletInterface {
     protected String type;
     protected int pris;
     protected int id;
-    protected int RABATPROCENT = ((pris * 15) / 100);
+    protected int rabatProcent = 15;
 
     LocalDate currentDate;
     Event event;

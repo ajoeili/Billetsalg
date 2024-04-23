@@ -15,8 +15,8 @@ public class Forsalgsbillet extends Billet {
     @Override
     public int beregnPris(Billet billet) {
         if (billet instanceof Forsalgsbillet)
-            if(erEventMindreEndTiDage(billet.event.getDato())) {
-                billet.pris = billet.RABATPROCENT;
+            if(erEventMindreEndTiDage(event.getDato())) {
+                pris = (pris/rabatProcent) * 100;;
                 return pris;
             }
         return pris;

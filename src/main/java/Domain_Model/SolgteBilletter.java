@@ -18,8 +18,27 @@ public class SolgteBilletter {
             }
         }
 
-        public int visSolgteBilletter () {
-            return 0;
+        public String visSolgteBilletter () {
+            int antalDørbilletter = 0;
+            int antalForsalgsbilletter = 0;
+            int antalStudiebilletter = 0;
+
+            for (Billet billet : solgteBilletter) {
+                if (billet instanceof Dørbillet) {
+                    antalDørbilletter++;
+                }
+                if (billet instanceof Forsalgsbillet) {
+                    antalForsalgsbilletter++;
+                }
+                if (billet instanceof Studiebillet) {
+                    antalStudiebilletter++;
+                }
+                return "ANTAL SOLGTE BILLETTER\n" +
+                        "Dørbilletter: " + antalDørbilletter + "\n" +
+                        "Forsalgsbilletter: " + antalForsalgsbilletter + "\n" +
+                        "Studiebilletter: " + antalStudiebilletter + "\n";
+            }
+            return "Ingen solgte billetter.";
         }
 
         public String hentAlleStudiekortId () {
