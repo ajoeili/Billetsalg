@@ -30,8 +30,12 @@ public class Billet implements BilletInterface {
     }
 
     @Override
-    public int beregnPris(Billet billet) {
-        return 0;
+    public int beregnPris(int pris) {
+        if (erEventMereEndTiDageVæk(event.getDato())) {
+            int rabatPris = pris * rabatProcent / 100;
+            pris -= rabatPris;
+        }
+        return pris;
     }
 
     @Override
@@ -50,7 +54,7 @@ public class Billet implements BilletInterface {
         return id;
     }
 
-    public boolean erEventMindreEndTiDage(String eventDatoString) {
+    public boolean erEventMereEndTiDageVæk(String eventDatoString) {
 
         LocalDate eventDato = LocalDate.parse(eventDatoString, DateTimeFormatter.ISO_LOCAL_DATE);
 

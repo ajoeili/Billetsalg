@@ -12,14 +12,4 @@ public class Forsalgsbillet extends Billet {
         super.printBillet();
     }
 
-    @Override
-    public int beregnPris(Billet billet) {
-        if (billet instanceof Forsalgsbillet)
-            if(erEventMindreEndTiDage(event.getDato())) {
-                pris = (pris/rabatProcent) * 100;;
-                return pris;
-            }
-        return pris;
-    }
-
 }

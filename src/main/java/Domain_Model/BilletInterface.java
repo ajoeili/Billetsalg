@@ -4,5 +4,5 @@ public interface BilletInterface {
 
     public void printBillet();
 
-    public int beregnPris(Billet billet);
+    public int beregnPris(int pris);
 }

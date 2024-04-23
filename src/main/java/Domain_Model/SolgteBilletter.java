@@ -14,6 +14,7 @@ public class SolgteBilletter {
 
     public void printSolgteBilletter() {
         for (Billet billet : solgteBilletter) {
+            billet.beregnPris(billet.pris);
             System.out.println(billet.toString());
         }
     }
@@ -58,6 +59,5 @@ public class SolgteBilletter {
         public void sorterBilletter () {
             solgteBilletter.sort(new IdComparator());
         }
-
     }
 

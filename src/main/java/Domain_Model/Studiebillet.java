@@ -16,14 +16,4 @@ public class Studiebillet extends Billet {
         super.printBillet();
     }
 
-    @Override
-    public int beregnPris(Billet billet) {
-        if (billet instanceof Studiebillet)
-            if(erEventMindreEndTiDage(event.getDato())) {
-                pris = (pris/rabatProcent) * 100;
-                return pris;
-            }
-        return pris;
-    }
-
 }
