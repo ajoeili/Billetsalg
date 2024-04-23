@@ -1,39 +1,40 @@
 package Domain_Model;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Billet implements BilletInterface {
-
-    // Billetinformation
 
     protected String type;
     protected int pris;
     protected int id;
     protected int rabatProcent = 15;
 
-    LocalDate currentDate;
+    LocalDate eventDato;
     Event event;
 
-    public Billet(String type, int pris, int id, String eventNavn, String eventDato) {
-        this.type = type;
-        this.pris = pris;
-        this.id = id;
+    public Billet(String type, int pris, int id, String eventNavn, String eventDatoStr) {
+        LocalDate eventDato = LocalDate.parse(eventDatoStr);
         event = new Event(eventNavn, eventDato);
+        this.type = type;
+        this.pris = beregnPris(pris);
+        this.id = id;
     }
 
     @Override
     public void printBillet() {
-        System.out.println(toString());
+        System.out.println(this);
     }
 
     @Override
     public int beregnPris(int pris) {
-        if (erEventMereEndTiDageVæk(event.getDato())) {
-            int rabatPris = pris * rabatProcent / 100;
-            pris -= rabatPris;
+        try {
+            if (event.dageTilEvent()) {
+                int rabatPris = pris * rabatProcent / 100;
+                pris -= rabatPris;
+            }
+        } catch (NullPointerException e) {
+            return 0;
         }
         return pris;
     }
@@ -52,21 +53,6 @@ public class Billet implements BilletInterface {
 
     public int getId() {
         return id;
-    }
-
-    public boolean erEventMereEndTiDageVæk(String eventDatoString) {
-
-        LocalDate eventDato = LocalDate.parse(eventDatoString, DateTimeFormatter.ISO_LOCAL_DATE);
-
-        ZonedDateTime tidszone = ZonedDateTime.now(ZoneId.of("+1"));
-        LocalDate dagensDato = tidszone.toLocalDate();
-
-        int hvorMangeDageTilEvent = dagensDato.until(eventDato).getDays();
-
-        if (hvorMangeDageTilEvent > 10) {
-            return true;
-        }
-        return false;
     }
 
 }

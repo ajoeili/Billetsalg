@@ -56,7 +56,7 @@ public class SolgteBilletter {
             return studieIds;
         }
 
-        public void sorterBilletter () {
+        public void sorterBilletter() {
             solgteBilletter.sort(new IdComparator());
         }
     }
